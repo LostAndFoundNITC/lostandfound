@@ -82,7 +82,7 @@ public class home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.lost) {
-           Intent intent = new Intent(this, Report.class);
+           Intent intent = new Intent(this, Mislayer.class);
             startActivity(intent);
           // Handle the lost action
         } else if (id == R.id.found) {

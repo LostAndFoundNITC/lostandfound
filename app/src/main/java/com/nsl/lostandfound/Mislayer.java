@@ -74,8 +74,7 @@ public class Mislayer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.lost) {
-            Intent intent = new Intent(this, Mislayer.class);
-            startActivity(intent);
+            //No Action ,Already on the same page
             // Handle the lost action
         } else if (id == R.id.found) {
             Intent intent = new Intent(this, Workinprogress.class);
@@ -98,8 +97,7 @@ public class Mislayer extends AppCompatActivity
 
     public void report(View view)
     {
-
-       /* Intent intent = new Intent(this, Report.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(this, Report.class);
+        startActivity(intent);
     }
 }
