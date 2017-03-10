@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
       if(isEmailValid(username) && isPasswordValid(password))
         {
             String type = "login";
-            new BackgroundWorker(this).execute(type, username.trim(), password.trim());
+            new BackgroundWorker1(this).execute(type, username.trim(), password.trim());
 
 
    }
@@ -93,12 +93,12 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    class BackgroundWorker extends AsyncTask<String,Void,String> {
+    class BackgroundWorker1 extends AsyncTask<String,Void,String> {
         //Context context;
 
         public char res;
         AlertDialog alertDialog;
-        BackgroundWorker (Context ctx) {
+        BackgroundWorker1 (Context ctx) {
             context = ctx;
         }
         @Override

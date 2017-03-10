@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,9 +82,9 @@ public class home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.lost) {
-            Intent intent = new Intent(this, Mislayer.class);
+           Intent intent = new Intent(this, Report.class);
             startActivity(intent);
-            // Handle the lost action
+          // Handle the lost action
         } else if (id == R.id.found) {
             Intent intent = new Intent(this, Workinprogress.class);
             startActivity(intent);

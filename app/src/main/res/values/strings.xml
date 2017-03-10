@@ -7,4 +7,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_workinprogress">Workinprogress</string>
+    <string name="title_activity_mislayer">Mislayer</string>
+    <string name="report">Report Loss</string>
+    <string name="title_activity_report">Report</string>
 </resources>

@@ -1,17 +1,12 @@
 package com.nsl.lostandfound;
 
 /**
- * Created by nik on 3/9/2017.
+ * Created by nik on 3/10/2017.
  */
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +23,7 @@ import java.net.URLEncoder;
 
 public class BackgroundWorker extends AsyncTask<String,Void,String> {
     Context context;
-    public static String res="";
+
     AlertDialog alertDialog;
     BackgroundWorker (Context ctx) {
         context = ctx;
@@ -36,11 +31,16 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://andromeda.nitc.ac.in/~m150035ca/login.php";
+        String login_url = "http://andromeda.nitc.ac.in/~m150035ca/report.php";
         if(type.equals("login")) {
             try {
-                String user_name = params[1];
-                String password = params[2];
+                String name = params[1];
+                String description = params[2];
+                String color = params[3];
+                String length = params[4];
+                String width = params[5];
+                String location = params[6];
+
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -48,8 +48,14 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
-                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+
+                String post_data = URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"+
+                        URLEncoder.encode("description","UTF-8")+"="+URLEncoder.encode(description,"UTF-8")+"&"+
+                        URLEncoder.encode("color","UTF-8")+"="+URLEncoder.encode(color,"UTF-8")+"&"+
+                        URLEncoder.encode("length","UTF-8")+"="+URLEncoder.encode(length,"UTF-8")+"&"+
+                        URLEncoder.encode("width","UTF-8")+"="+URLEncoder.encode(width,"UTF-8")+"&"+
+                        URLEncoder.encode("location","UTF-8")+"="+URLEncoder.encode(location,"UTF-8");
+
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -60,8 +66,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 String line="";
                 while((line = bufferedReader.readLine())!= null) {
                     result += line;
+                    result +="\n\n";
                 }
-                res=result;
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
@@ -78,24 +84,17 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
-    }
+        alertDialog.setTitle("Report Status");
 
+    }
 
     @Override
     protected void onPostExecute(String result) {
-
-        //alertDialog.setMessage(res);
-       // alertDialog.show();
-        Log.i("Message",res);
-        Toast.makeText(context,res,Toast.LENGTH_LONG).show();
-
+        alertDialog.setMessage(result);
+        alertDialog.show();
     }
 
-    public String getRes(){
 
-        return res;
-    }
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
