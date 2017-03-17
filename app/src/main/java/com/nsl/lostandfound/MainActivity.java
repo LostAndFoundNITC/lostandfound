@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -40,14 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Id to identity READ_CONTACTS permission request.
      */
 
-   // public static final String EMAIL = "com.nsl.lostandfound.MAIL";
-   // public static final String PASSWORD = "com.nsl.lostandfound.PASS";
+    // public static final String EMAIL = "com.nsl.lostandfound.MAIL";
+    // public static final String PASSWORD = "com.nsl.lostandfound.PASS";
 
 
     Context context;
     EditText UsernameEt, PasswordEt;
-    String result="";
-    MainActivity x =this;
+    String result = "";
+    MainActivity x = this;
+
     private SignInButton signInButton;
     //Signing Options
     private GoogleSignInOptions gso;
@@ -56,13 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
 
-//    //TextViews
-//    private TextView textViewName;
-//    private TextView textViewEmail;
-//    private NetworkImageView profilePhoto;
-//
-//    //Image Loader
-//    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        UsernameEt = (EditText)findViewById(R.id.input_email);
-        PasswordEt = (EditText)findViewById(R.id.input_password);
-        EditText e =(EditText) findViewById(R.id.input_email);
+        UsernameEt = (EditText) findViewById(R.id.input_email);
+        PasswordEt = (EditText) findViewById(R.id.input_password);
+        EditText e = (EditText) findViewById(R.id.input_email);
         e.clearComposingText();
-        EditText p =(EditText) findViewById(R.id.input_password);
+        EditText p = (EditText) findViewById(R.id.input_password);
         p.clearComposingText();
 
 //Google Signin Option
@@ -116,18 +111,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             //Calling a new function to handle signin
-            if(result.isSuccess())
-            {
-                Intent I=new Intent(MainActivity.this,home.class);
+            if (result.isSuccess()) {
+                GoogleSignInAccount acct = result.getSignInAccount();
+
+                String personName = acct.getDisplayName();
+                String personEmail = acct.getEmail();
+                //Uri personPhoto = acct.getPhotoUrl();
+                String type = "GoogleLogin";
+                new BackgroundWorkerGoogle().execute(type, personName.trim(), personEmail.trim());
+
+                Intent I = new Intent(MainActivity.this, home.class);
                 startActivity(I);
             }
         }
     }
- private boolean isEmailValid(String email) {
+
+    private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
- private boolean isPasswordValid(String password) {
+
+    private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
@@ -137,18 +141,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String username = UsernameEt.getText().toString();
         String password = PasswordEt.getText().toString();
 
-      if(isEmailValid(username) && isPasswordValid(password))
-        {
+        if (isEmailValid(username) && isPasswordValid(password)) {
             String type = "login";
             new BackgroundWorker1(this).execute(type, username.trim(), password.trim());
 
 
-   }
-        else {
-             TextView t =(TextView)findViewById(R.id.warning);
-          t.clearComposingText();
-          t.setText("Invalid Pattern");
-          }
+        } else {
+            TextView t = (TextView) findViewById(R.id.warning);
+            t.clearComposingText();
+            t.setText("Invalid Pattern");
+        }
 
     }
 
@@ -167,43 +169,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    class BackgroundWorker1 extends AsyncTask<String,Void,String> {
+    class BackgroundWorker1 extends AsyncTask<String, Void, String> {
         //Context context;
 
         public char res;
         AlertDialog alertDialog;
-        BackgroundWorker1 (Context ctx) {
+
+        BackgroundWorker1(Context ctx) {
             context = ctx;
         }
+
         @Override
         protected String doInBackground(String... params) {
             String type = params[0];
             String login_url = "http://andromeda.nitc.ac.in/~m150035ca/login.php";
-            if(type.equals("login")) {
+            if (type.equals("login")) {
                 try {
                     String user_name = params[1];
                     String password = params[2];
                     URL url = new URL(login_url);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
-                            +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                    String post_data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&"
+                            + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
-                    InputStream inputStream= httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-                    String line="";
-                    while((line = bufferedReader.readLine())!= null) {
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
                         result += line;
                     }
-                    res=result.toCharArray()[result.length()-1];
+                    res = result.toCharArray()[result.length() - 1];
 
                     bufferedReader.close();
 
@@ -229,21 +233,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String result) {
 
-            TextView t =(TextView)findViewById(R.id.warning);
+            TextView t = (TextView) findViewById(R.id.warning);
             t.clearComposingText();
             //alertDialog.setMessage(res);
             //alertDialog.show();
-            if(res == 't')
-            {
-                Toast.makeText(context,"Logged In Successfully !!",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(x,home.class);
+            if (res == 't') {
+                Toast.makeText(context, "Logged In Successfully !!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(x, home.class);
                 startActivity(intent);
 
-            }
-            else {
+            } else {
 
 
-                Toast.makeText(context," Unsuccessful Login !!",Toast.LENGTH_LONG).show();
+                Toast.makeText(context, " Unsuccessful Login !!", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -251,5 +253,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
+    }
+
+
+    class BackgroundWorkerGoogle extends AsyncTask<String, Void, String> {
+        public char res;
+        AlertDialog alertDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            String type = params[0];
+            String login_url = "http://andromeda.nitc.ac.in/~m150037ca/login.php";
+            if (type.equals("GoogleLogin")) {
+                try {
+                    String personName = params[1];
+                    String personEmail = params[2];
+                    URL url = new URL(login_url);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("personName", "UTF-8") + "=" + URLEncoder.encode(personName, "UTF-8") + "&"
+                            + URLEncoder.encode("personEmail", "UTF-8") + "=" + URLEncoder.encode(personEmail, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                    String line = "";
+
+                    while ((line = bufferedReader.readLine()) != null) {
+                        result += line;
+                    }
+                    res = result.toCharArray()[result.length() - 1];
+
+                    bufferedReader.close();
+
+                    inputStream.close();
+                    httpURLConnection.disconnect();
+                    return result;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
     }
 }
