@@ -1,22 +1,22 @@
 package com.nsl.lostandfound;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,10 +30,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+
 /**
  * A login screen that offers login via email/password.
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -41,20 +42,86 @@ public class MainActivity extends AppCompatActivity{
 
    // public static final String EMAIL = "com.nsl.lostandfound.MAIL";
    // public static final String PASSWORD = "com.nsl.lostandfound.PASS";
-            Context context;
+
+
+    Context context;
     EditText UsernameEt, PasswordEt;
     String result="";
     MainActivity x =this;
+    private SignInButton signInButton;
+    //Signing Options
+    private GoogleSignInOptions gso;
+    //google api client
+    private GoogleApiClient mGoogleApiClient;
+    //Signin constant to check the activity result
+    private int RC_SIGN_IN = 100;
+
+//    //TextViews
+//    private TextView textViewName;
+//    private TextView textViewEmail;
+//    private NetworkImageView profilePhoto;
+//
+//    //Image Loader
+//    private ImageLoader imageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         UsernameEt = (EditText)findViewById(R.id.input_email);
         PasswordEt = (EditText)findViewById(R.id.input_password);
         EditText e =(EditText) findViewById(R.id.input_email);
         e.clearComposingText();
         EditText p =(EditText) findViewById(R.id.input_password);
         p.clearComposingText();
+
+//Google Signin Option
+
+        //Initializing google signin option
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        //Initializing signinbutton
+        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        signInButton.setScopes(gso.getScopeArray());
+
+        //Initializing google api client
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+        //Setting onclick listener to signing button
+        signInButton.setOnClickListener(this);
+
+    }
+
+    private void signIn() {
+        //Creating an intent
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
+        //Starting intent for result
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //If signin
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            //Calling a new function to handle signin
+            if(result.isSuccess())
+            {
+                Intent I=new Intent(MainActivity.this,home.class);
+                startActivity(I);
+            }
+        }
     }
  private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -86,11 +153,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (v == signInButton) {
+            //Calling signin
+            signIn();
+        }
+    }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
-
-
-
+    }
 
 
     class BackgroundWorker1 extends AsyncTask<String,Void,String> {

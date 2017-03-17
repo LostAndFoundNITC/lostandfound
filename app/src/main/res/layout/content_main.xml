@@ -71,13 +71,10 @@
             android:background="#9C000000"
             android:onClick="login"/>
 
-        <TextView android:id="@+id/link_signup"
-            android:layout_width="fill_parent"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="No account yet? Create one"
-            android:gravity="center"
-            android:textSize="16dip"/>
-
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </ScrollView>
