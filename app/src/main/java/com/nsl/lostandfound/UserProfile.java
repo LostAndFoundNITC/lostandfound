@@ -9,18 +9,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class home extends MainActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class UserProfile extends MainActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_user_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -28,20 +30,22 @@ public class home extends MainActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Intent intent = getIntent();
-        //String email = intent.getStringExtra(MainActivity.EMAIL);
-        //String pass = intent.getStringExtra(MainActivity.EMAIL);
-        // Capture the layout's TextView and set the string as its text
-        //TextView textView = (TextView) findViewById(R.id.input_email);
-       // textView.setText(email);
-       // TextView textView1 = (TextView) findViewById(R.id.input_password);
-       // textView.setText(pass);
+
+        Bundle extras = getIntent().getExtras();
+        String name= extras.getString("name");
+        String email= extras.getString("email");
+        String photo= extras.getString("photo");
+        TextView t  =(TextView)findViewById(R.id.PersonName);
+        t.setText(name);
+        TextView t1  =(TextView)findViewById(R.id.PersonEmail);
+        t1.setText(email);
+
     }
 
     @Override
@@ -57,7 +61,7 @@ public class home extends MainActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+        getMenuInflater().inflate(R.menu.user_profile, menu);
         return true;
     }
 
@@ -80,19 +84,13 @@ public class home extends MainActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Bundle extras = getIntent().getExtras();
-        String name= extras.getString("name");
-        String email= extras.getString("email");
-        String photo = extras.getString("photo");
         if (id == R.id.lost) {
-           Intent intent = new Intent(this, Mislayer.class);
-            intent.putExtra("photo",photo);
-            intent.putExtra("name",name);
-            intent.putExtra("email",email);
+            Intent intent = new Intent(this, Mislayer.class);
             startActivity(intent);
-          // Handle the lost action
+            // Handle the lost action
         } else if (id == R.id.found) {
             Intent intent = new Intent(this, Workinprogress.class);
             startActivity(intent);
@@ -101,15 +99,18 @@ public class home extends MainActivity
             startActivity(intent);
         } else if (id == R.id.user_profile) {
 
+            Bundle extras = getIntent().getExtras();
+            String name= extras.getString("name");
+            String email= extras.getString("email");
+            String photo = extras.getString("photo");
             Intent intent = new Intent(this, UserProfile.class);
             intent.putExtra("photo",photo);
             intent.putExtra("name",name);
-           intent.putExtra("email",email);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.logout) {
             signOut();
             revokeAccess();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -122,7 +123,7 @@ public class home extends MainActivity
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Intent intent = new Intent(home.this , MainActivity.class);
+                        Intent intent = new Intent(UserProfile.this , MainActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -138,5 +139,13 @@ public class home extends MainActivity
                     }
                 });
     }
+    public void EditProfile(View view)
+    { //Bundle extras = getIntent().getExtras();
+        Intent intent = new Intent(this, EditProfile.class);
+        //String email= extras.getString("email");
+        //intent.putExtra("email",email);
+        startActivity(intent);
+    }
+
 
 }

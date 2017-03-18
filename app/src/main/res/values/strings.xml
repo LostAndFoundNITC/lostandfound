@@ -8,6 +8,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_workinprogress">Workinprogress</string>
     <string name="title_activity_mislayer">Mislayer</string>
+    <string name="title_activity_profile">Mislayer</string>
+
     <string name="report">Report Loss</string>
     <string name="title_activity_report">Report</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
 </resources>

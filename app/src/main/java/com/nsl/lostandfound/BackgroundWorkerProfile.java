@@ -1,7 +1,7 @@
 package com.nsl.lostandfound;
 
 /**
- * Created by nik on 3/10/2017.
+ * Created by lakshit on 3/18/2017.
  */
 
 import android.app.AlertDialog;
@@ -21,26 +21,22 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class BackgroundWorker extends AsyncTask<String,Void,String> {
+public class BackgroundWorkerProfile extends AsyncTask<String,Void,String> {
     Context context;
 
     AlertDialog alertDialog;
-    BackgroundWorker (Context ctx) {
+    BackgroundWorkerProfile (Context ctx) {
         context = ctx;
     }
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://andromeda.nitc.ac.in/~m150035ca/report.php";
-        if(type.equals("login")) {
+        String login_url = "http://andromeda.nitc.ac.in/~m150035ca/EditProfile.php";
+        if(type.equals("EditProfile")) {
             try {
-                String name = params[1];
-                String description = params[2];
-                String color = params[3];
-                String length = params[4];
-                String width = params[5];
-                String location = params[6];
-                String email = params[7];
+                String address = params[1];
+                String phone = params[2];
+                //String email = params[3];
 
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -50,13 +46,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"+
-                        URLEncoder.encode("description","UTF-8")+"="+URLEncoder.encode(description,"UTF-8")+"&"+
-                        URLEncoder.encode("color","UTF-8")+"="+URLEncoder.encode(color,"UTF-8")+"&"+
-                        URLEncoder.encode("length","UTF-8")+"="+URLEncoder.encode(length,"UTF-8")+"&"+
-                        URLEncoder.encode("width","UTF-8")+"="+URLEncoder.encode(width,"UTF-8")+"&"+
-                        URLEncoder.encode("location","UTF-8")+"="+URLEncoder.encode(location,"UTF-8")+"&"+
-                        URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8");
+                String post_data = URLEncoder.encode("address","UTF-8")+"="+URLEncoder.encode(address,"UTF-8")+"&"+
+                        URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8");
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
@@ -86,7 +77,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Report Status");
+        alertDialog.setTitle("Profile Status");
 
     }
 

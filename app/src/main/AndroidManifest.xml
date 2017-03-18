@@ -38,7 +38,11 @@
         <activity
             android:name=".Mislayer"
             android:label="@string/title_activity_mislayer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserProfile"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.nsl.lostandfound;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     MainActivity x = this;
+    String personName;
+    String personEmail;
 
     private SignInButton signInButton;
     //Signing Options
@@ -67,13 +70,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (result.isSuccess()) {
                 GoogleSignInAccount acct = result.getSignInAccount();
 
-                String personName = acct.getDisplayName();
-                String personEmail = acct.getEmail();
-                //Uri personPhoto = acct.getPhotoUrl();
+                personName = acct.getDisplayName();
+                personEmail = acct.getEmail();
+                Uri personPhoto = acct.getPhotoUrl();
+                String photo = personPhoto.toString();
                 String type = "GoogleLogin";
                 new BackgroundWorkerGoogle().execute(type, personName.trim(), personEmail.trim());
 
                 Intent I = new Intent(MainActivity.this, home.class);
+                I.putExtra("name",personName);
+                I.putExtra("email",personEmail);
+                I.putExtra("photo",photo);
                 startActivity(I);
             }
         }

@@ -1,12 +1,9 @@
 package com.nsl.lostandfound;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class Report extends ActionBarActivity {
@@ -30,9 +27,11 @@ public class Report extends ActionBarActivity {
         String length = LengthEt.getText().toString();
         String width = WidthEt.getText().toString();
         String location = LocationEt.getText().toString();
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
         String type = "login";
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, name, description, color, length, width, location);
+        backgroundWorker.execute(type, name, description, color, length, width, location,email);
     }
 
 }
