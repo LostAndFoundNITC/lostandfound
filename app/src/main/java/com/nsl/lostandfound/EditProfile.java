@@ -1,5 +1,7 @@
+
 package com.nsl.lostandfound;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -17,13 +19,22 @@ public class EditProfile extends ActionBarActivity {
     }
 
     public void UpdateProfile(View view) {
-        //Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         String address = AddressEt.getText().toString();
         String phone = PhoneEt.getText().toString();
-        //String email= extras.getString("email");
+        String email= extras.getString("email");
         String type = "EditProfile";
-        BackgroundWorkerProfile backgroundWorkerProfile = new BackgroundWorkerProfile(this);
-        backgroundWorkerProfile.execute(type, address, phone);
+        //Toast.makeText(this,address+phone+type, Toast.LENGTH_SHORT).show();
+         BackgroundWorkerProfile backgroundWorkerProfile = new BackgroundWorkerProfile(this);
+         backgroundWorkerProfile.execute(type, address, phone,email);
+
+
+        String name= extras.getString("name");
+        Intent intent = new Intent(this, UserProfile.class);
+        intent.putExtra("name",name);
+        intent.putExtra("email",email);
+        startActivity(intent);
+
     }
 
 }

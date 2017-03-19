@@ -36,7 +36,7 @@ public class BackgroundWorkerProfile extends AsyncTask<String,Void,String> {
             try {
                 String address = params[1];
                 String phone = params[2];
-                //String email = params[3];
+                String email = params[3];
 
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -47,7 +47,8 @@ public class BackgroundWorkerProfile extends AsyncTask<String,Void,String> {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                 String post_data = URLEncoder.encode("address","UTF-8")+"="+URLEncoder.encode(address,"UTF-8")+"&"+
-                        URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8");
+                        URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"+
+                        URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8");
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
@@ -72,19 +73,6 @@ public class BackgroundWorkerProfile extends AsyncTask<String,Void,String> {
             }
         }
         return null;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Profile Status");
-
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
     }
 
 
