@@ -16,4 +16,5 @@
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_edit_profile">EditProfile</string>
     <string name="title_activity_my_post">MyPost</string>
+    <string name="title_activity_search">Search</string>
 </resources>

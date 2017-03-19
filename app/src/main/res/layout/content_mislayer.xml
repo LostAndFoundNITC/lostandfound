@@ -23,7 +23,7 @@
                 android:theme="@style/MyButton"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="118dp"
-                android:layout_below="@+id/button2"
+                android:layout_below="@+id/search"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="28dp"
                 android:onClick="report"/>
@@ -33,11 +33,12 @@
                 android:layout_height="wrap_content"
                 android:text="Search Item"
                 android:theme="@style/MyButton"
-                android:id="@+id/button2"
+                android:id="@+id/search"
                 android:layout_marginTop="12dp"
                 android:layout_below="@+id/imageButton"
                 android:layout_alignRight="@+id/button"
-                android:layout_alignEnd="@+id/button" />
+                android:layout_alignEnd="@+id/button"
+                android:onClick="search"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

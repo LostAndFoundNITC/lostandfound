@@ -140,4 +140,11 @@ public class Mislayer extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
+    public void search(View view){
+        Intent intent = new Intent(this,Search.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        intent.putExtra("email",email);
+        startActivity(intent);
+    }
 }
