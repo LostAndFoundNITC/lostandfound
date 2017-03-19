@@ -107,25 +107,27 @@ public class UserProfile extends MainActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Bundle extras = getIntent().getExtras();
+        String name= extras.getString("name");
+        String email= extras.getString("email");
+        String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
+            intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
             // Handle the lost action
         } else if (id == R.id.found) {
             Intent intent = new Intent(this, Workinprogress.class);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, MyPost.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_profile) {
-
-            Bundle extras = getIntent().getExtras();
-            String name= extras.getString("name");
-            String email= extras.getString("email");
-            String photo = extras.getString("photo");
             Intent intent = new Intent(this, UserProfile.class);
             intent.putExtra("photo",photo);
             intent.putExtra("name",name);
@@ -134,6 +136,7 @@ public class UserProfile extends MainActivity
         } else if (id == R.id.logout) {
             signOut();
             revokeAccess();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,7 +155,6 @@ public class UserProfile extends MainActivity
                 });
     }
     // [END signOut]
-
     // [START revokeAccess]
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
@@ -171,14 +173,10 @@ public class UserProfile extends MainActivity
         String name= extras.getString("name");
         intent.putExtra("name",name);
         startActivity(intent);
-        //Toast.makeText(this,email,Toast.LENGTH_LONG).show();
     }
-
+/* BackgroundWorker class to get contact from database*/
 
     String result="";
-
-
-
 
     public class BackgroundWorkerGetContact extends AsyncTask<String,Void,String> {
         Context context;
@@ -252,12 +250,9 @@ public class UserProfile extends MainActivity
     }
 
 
+/* BackgroundWorker class to get Address from database*/
 
     String address="";
-
-
-
-
     public class BackgroundWorkerGetAddress extends AsyncTask<String,Void,String> {
         Context context;
 
@@ -328,9 +323,5 @@ public class UserProfile extends MainActivity
             super.onProgressUpdate(values);
         }
     }
-
-
-
-
 
 }

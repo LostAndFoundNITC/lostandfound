@@ -53,14 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signInButton.setOnClickListener(this);
     }
 
-    private void signIn() {
-        //Creating an intent
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        //Starting intent for result
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
+        @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //If signin
@@ -76,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String photo = personPhoto.toString();
                 String type = "GoogleLogin";
                 new BackgroundWorkerGoogle().execute(type, personName.trim(), personEmail.trim());
-
                 Intent I = new Intent(MainActivity.this, home.class);
                 I.putExtra("name",personName);
                 I.putExtra("email",personEmail);
@@ -93,10 +85,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             signIn();
         }
     }
+    private void signIn() {
+        //Creating an intent
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        //Starting intent for result
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
-
 }

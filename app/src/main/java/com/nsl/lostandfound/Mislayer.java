@@ -6,13 +6,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class Mislayer extends AppCompatActivity
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+public class Mislayer extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -70,22 +73,35 @@ public class Mislayer extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Bundle extras = getIntent().getExtras();
+        String name= extras.getString("name");
+        String email= extras.getString("email");
+        String photo = extras.getString("photo");
         if (id == R.id.lost) {
-            //No Action ,Already on the same page
+            Intent intent = new Intent(this, Mislayer.class);
+            intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
             // Handle the lost action
         } else if (id == R.id.found) {
             Intent intent = new Intent(this, Workinprogress.class);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, MyPost.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_profile) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, UserProfile.class);
+            intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.logout) {
-            Intent intent = new Intent(this, Workinprogress.class);
-            startActivity(intent);
+            signOut();
+            revokeAccess();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -93,11 +109,34 @@ public class Mislayer extends AppCompatActivity
         return true;
     }
 
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        Intent intent = new Intent(Mislayer.this , MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+    }
+    // [END signOut]
+    // [START revokeAccess]
+    private void revokeAccess() {
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                    }
+                });
+    }
+
     public void report(View view)
     {
         Intent intent = new Intent(this, Report.class);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
+        String name= extras.getString("name");
+        intent.putExtra("name",name);
         intent.putExtra("email",email);
         startActivity(intent);
     }
