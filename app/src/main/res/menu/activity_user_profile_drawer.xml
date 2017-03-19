@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+
+            android:id="@+id/lost"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Lost Something ?" />
+        <item
+
+            android:id="@+id/found"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Found Something ?" />
+        <item
+
+            android:id="@+id/user_posts"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="My Posts" />
+
+    </group>
+
+    <item android:title=" " >
+        <menu>
+            <item
+
+                android:id="@+id/user_profile"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Profile" />
+            <item
+
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

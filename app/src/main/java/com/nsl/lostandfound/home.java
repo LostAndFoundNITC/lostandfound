@@ -42,7 +42,6 @@ public class home extends MainActivity
        // textView.setText(email);
        // TextView textView1 = (TextView) findViewById(R.id.input_password);
        // textView.setText(pass);
-
     }
 
     @Override
@@ -83,8 +82,15 @@ public class home extends MainActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Bundle extras = getIntent().getExtras();
+        String name= extras.getString("name");
+        String email= extras.getString("email");
+        String photo = extras.getString("photo");
         if (id == R.id.lost) {
            Intent intent = new Intent(this, Mislayer.class);
+            intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
           // Handle the lost action
         } else if (id == R.id.found) {
@@ -94,7 +100,11 @@ public class home extends MainActivity
             Intent intent = new Intent(this, Workinprogress.class);
             startActivity(intent);
         } else if (id == R.id.user_profile) {
-            Intent intent = new Intent(this, Workinprogress.class);
+
+            Intent intent = new Intent(this, UserProfile.class);
+            intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+           intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.logout) {
             signOut();
