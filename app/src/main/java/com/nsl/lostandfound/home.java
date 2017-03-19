@@ -74,7 +74,7 @@ public class home extends MainActivity
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
         String email= extras.getString("email");
-        String photo = extras.getString("photo");
+        //String photo = extras.getString("photo");
         if (id == R.id.lost) {
            Intent intent = new Intent(this, Mislayer.class);
             intent.putExtra("name",name);

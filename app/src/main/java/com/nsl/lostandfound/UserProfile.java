@@ -111,10 +111,10 @@ public class UserProfile extends MainActivity
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
         String email= extras.getString("email");
-        String photo = extras.getString("photo");
+       //String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
-            intent.putExtra("photo",photo);
+           // intent.putExtra("photo",photo);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
@@ -129,7 +129,7 @@ public class UserProfile extends MainActivity
             startActivity(intent);
         } else if (id == R.id.user_profile) {
             Intent intent = new Intent(this, UserProfile.class);
-            intent.putExtra("photo",photo);
+           // intent.putExtra("photo",photo);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
