@@ -19,6 +19,6 @@
 
     <style name="MyButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/indigo</item>
-        <item name="colorButtonNormal">@color/pink</item>
+        <item name="colorButtonNormal">@color/BlueViolet</item>
     </style>
 </resources>

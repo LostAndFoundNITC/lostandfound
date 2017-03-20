@@ -13,10 +13,6 @@ public class FReport extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_freport);
-        Bundle extras = getIntent().getExtras();
-        String email= extras.getString("email");
-        String name= extras.getString("name");
-        Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
         NameEt = (EditText)findViewById(R.id.etName);
         DescriptionEt = (EditText)findViewById(R.id.etDes);
         ColorEt = (EditText)findViewById(R.id.etColor);
@@ -35,9 +31,10 @@ public class FReport extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
         String type = "ReportFinder";
+        Toast.makeText(this,email,Toast.LENGTH_LONG).show();
         BackgroundWorkerFinder backgroundWorker = new BackgroundWorkerFinder(this);
         backgroundWorker.execute(type, name, description, color, length, width, location,email);
-        Toast.makeText(this,email,Toast.LENGTH_LONG).show();
+
         extras = getIntent().getExtras();
         String username= extras.getString("name");
         Intent intent = new Intent(this, Finder.class);

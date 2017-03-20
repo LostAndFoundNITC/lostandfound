@@ -85,7 +85,9 @@ public class Mislayer extends MainActivity
             startActivity(intent);
             // Handle the lost action
         } else if (id == R.id.found) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, Finder.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
             Intent intent = new Intent(this, MyPost.class);

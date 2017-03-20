@@ -81,26 +81,31 @@ public class MyPost extends MainActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Bundle extras = getIntent().getExtras();
-        String name = extras.getString("name");
-        String email = extras.getString("email");
+        String name= extras.getString("name");
+        String email= extras.getString("email");
+        // String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
-            intent.putExtra("name", name);
-            intent.putExtra("email", email);
+            // intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
             // Handle the lost action
         } else if (id == R.id.found) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, Finder.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
             Intent intent = new Intent(this, MyPost.class);
             intent.putExtra("name",name);
-            intent.putExtra("email", email);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_profile) {
             Intent intent = new Intent(this, UserProfile.class);
-            intent.putExtra("name", name);
-            intent.putExtra("email", email);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.logout) {
             signOut();
@@ -118,12 +123,11 @@ public class MyPost extends MainActivity
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Intent intent = new Intent(MyPost.this, MainActivity.class);
+                        Intent intent = new Intent(MyPost.this , MainActivity.class);
                         startActivity(intent);
                     }
                 });
     }
-
     // [END signOut]
     // [START revokeAccess]
     private void revokeAccess() {
