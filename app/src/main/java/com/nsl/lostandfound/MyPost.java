@@ -9,19 +9,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class Mislayer extends MainActivity
+public class MyPost extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mislayer);
+        setContentView(R.layout.activity_my_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,6 +35,12 @@ public class Mislayer extends MainActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Bundle extras = getIntent().getExtras();
+        String email = extras.getString("email");
+        WebView w = (WebView) findViewById(R.id.MyPost);
+        w.setWebViewClient(new WebViewClient());
+        w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/mypost.php?email='" + email + "'");
+        //w.loadUrl("http://www.google.com");
     }
 
     @Override
@@ -49,7 +56,7 @@ public class Mislayer extends MainActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mislayer, menu);
+        getMenuInflater().inflate(R.menu.my_post, menu);
         return true;
     }
 
@@ -76,10 +83,10 @@ public class Mislayer extends MainActivity
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
         String email= extras.getString("email");
-       // String photo = extras.getString("photo");
+        // String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
-           // intent.putExtra("photo",photo);
+            // intent.putExtra("photo",photo);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
@@ -116,7 +123,7 @@ public class Mislayer extends MainActivity
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Intent intent = new Intent(Mislayer.this , MainActivity.class);
+                        Intent intent = new Intent(MyPost.this , MainActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -130,23 +137,5 @@ public class Mislayer extends MainActivity
                     public void onResult(Status status) {
                     }
                 });
-    }
-
-    public void report(View view)
-    {
-        Intent intent = new Intent(this, Report.class);
-        Bundle extras = getIntent().getExtras();
-        String email= extras.getString("email");
-        String name= extras.getString("name");
-        intent.putExtra("name",name);
-        intent.putExtra("email",email);
-        startActivity(intent);
-    }
-    public void search(View view){
-        Intent intent = new Intent(this,Search.class);
-        Bundle extras = getIntent().getExtras();
-        String email= extras.getString("email");
-        intent.putExtra("email",email);
-        startActivity(intent);
     }
 }

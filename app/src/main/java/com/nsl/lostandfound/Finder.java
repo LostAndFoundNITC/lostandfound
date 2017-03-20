@@ -15,17 +15,15 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class Mislayer extends MainActivity
+public class Finder extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mislayer);
+        setContentView(R.layout.activity_finder);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -49,7 +47,7 @@ public class Mislayer extends MainActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mislayer, menu);
+        getMenuInflater().inflate(R.menu.finder, menu);
         return true;
     }
 
@@ -76,10 +74,10 @@ public class Mislayer extends MainActivity
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
         String email= extras.getString("email");
-       // String photo = extras.getString("photo");
+        // String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
-           // intent.putExtra("photo",photo);
+            // intent.putExtra("photo",photo);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
@@ -116,7 +114,7 @@ public class Mislayer extends MainActivity
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Intent intent = new Intent(Mislayer.this , MainActivity.class);
+                        Intent intent = new Intent(Finder.this , MainActivity.class);
                         startActivity(intent);
                     }
                 });
@@ -134,19 +132,25 @@ public class Mislayer extends MainActivity
 
     public void report(View view)
     {
-        Intent intent = new Intent(this, Report.class);
+        Intent intent = new Intent(Finder.this, FReport.class);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
         String name= extras.getString("name");
+        //Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
         intent.putExtra("name",name);
         intent.putExtra("email",email);
         startActivity(intent);
     }
+
     public void search(View view){
-        Intent intent = new Intent(this,Search.class);
+        Intent intent =new Intent(this,SearchLoss.class);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
-        intent.putExtra("email",email);
+        String name= extras.getString("name");
+       // Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
+        intent.putExtra("name",name);
+        intent.putExtra("email","hello");
         startActivity(intent);
+
     }
 }

@@ -40,10 +40,24 @@
             android:label="@string/title_activity_mislayer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".MyPost"
+            android:label="@string/title_activity_my_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".UserProfile"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".EditProfile" />
+        <activity
+            android:name=".Search"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Finder"
+            android:label="@string/title_activity_finder"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FReport" />
+        <activity android:name=".SearchLoss"></activity>
     </application>
 
 </manifest>

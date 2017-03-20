@@ -2,6 +2,7 @@ package com.nsl.lostandfound;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
@@ -24,8 +27,6 @@ public class home extends MainActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -34,25 +35,22 @@ public class home extends MainActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Intent intent = getIntent();
-        //String email = intent.getStringExtra(MainActivity.EMAIL);
-        //String pass = intent.getStringExtra(MainActivity.EMAIL);
-        // Capture the layout's TextView and set the string as its text
-        //TextView textView = (TextView) findViewById(R.id.input_email);
-       // textView.setText(email);
-       // TextView textView1 = (TextView) findViewById(R.id.input_password);
-       // textView.setText(pass);
+
+
+
+
+            WebView w;
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
+        } else {
+            w = (WebView) findViewById(R.id.recent);
+            w.clearCache(true);
+            w.clearHistory();
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/recent.php");
+        }
+
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,33 +74,53 @@ public class home extends MainActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private Boolean exit = false;
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
         String email= extras.getString("email");
-        String photo = extras.getString("photo");
+        //String photo = extras.getString("photo");
         if (id == R.id.lost) {
            Intent intent = new Intent(this, Mislayer.class);
-            intent.putExtra("photo",photo);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
           // Handle the lost action
         } else if (id == R.id.found) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, Finder.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, MyPost.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_profile) {
-
             Intent intent = new Intent(this, UserProfile.class);
-            intent.putExtra("photo",photo);
             intent.putExtra("name",name);
            intent.putExtra("email",email);
             startActivity(intent);
@@ -128,7 +146,6 @@ public class home extends MainActivity
                 });
     }
     // [END signOut]
-
     // [START revokeAccess]
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(

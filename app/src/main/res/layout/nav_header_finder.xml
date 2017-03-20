@@ -11,12 +11,12 @@
     android:gravity="bottom">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="30dp"
-        android:src="@drawable/lostandfoundsign"
-        android:id="@+id/imageView"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/lostandfoundsign" />
 
 
 </LinearLayout>
