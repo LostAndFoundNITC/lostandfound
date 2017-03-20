@@ -9,8 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -51,12 +49,6 @@ public class Search extends MainActivity
             w.clearCache(true);
             w.clearHistory();
             w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/MislayerSearch.php?email='"+email+"'");
-            w.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return (event.getAction() == MotionEvent.ACTION_MOVE);
-                }
-            });
         }
 
 
@@ -68,7 +60,7 @@ public class Search extends MainActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+           finish();
         }
     }
 
