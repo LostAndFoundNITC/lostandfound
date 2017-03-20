@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 public class Search extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,8 +33,21 @@ public class Search extends AppCompatActivity
         String email= extras.getString("email");
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        WebView w = (WebView)findViewById(R.id.search_form);
-        w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/search.php?email='"+email+"'");
+
+
+        WebView w;
+        w = (WebView) findViewById(R.id.search_form);
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            w.clearCache(true);
+            w.clearHistory();
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/search.php?email='"+email+"'");
+        }
+
+
     }
 
     @Override
