@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
@@ -32,6 +34,20 @@ public class home extends MainActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+            WebView w;
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
+        } else {
+            w = (WebView) findViewById(R.id.recent);
+            w.clearCache(true);
+            w.clearHistory();
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/recent.php");
+        }
+
     }
 
     @Override
@@ -82,7 +98,9 @@ public class home extends MainActivity
             startActivity(intent);
           // Handle the lost action
         } else if (id == R.id.found) {
-            Intent intent = new Intent(this, Workinprogress.class);
+            Intent intent = new Intent(this, Finder.class);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
         } else if (id == R.id.user_posts) {
             Intent intent = new Intent(this, MyPost.class);

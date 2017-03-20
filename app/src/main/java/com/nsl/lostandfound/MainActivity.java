@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                // Toast.makeText(this,personName,Toast.LENGTH_LONG).show();
-                Toast.makeText(this,personEmail,Toast.LENGTH_LONG).show();
+               // Toast.makeText(this,personEmail,Toast.LENGTH_LONG).show();
 
                 String type = "GoogleLogin";
                 new BackgroundWorkerGoogle(this).execute(type, personName, personEmail);

@@ -1,5 +1,6 @@
 package com.nsl.lostandfound;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,31 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
+import android.view.View;
+import android.widget.Toast;
 
-public class Search extends AppCompatActivity
+public class Finder extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_finder);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        Bundle extras = getIntent().getExtras();
-        String email= extras.getString("email");
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        WebView w = (WebView)findViewById(R.id.search_form);
-        w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/search.php?email='"+email+"'");
     }
 
     @Override
@@ -49,7 +45,7 @@ public class Search extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.finder, menu);
         return true;
     }
 
@@ -74,7 +70,7 @@ public class Search extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+       /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -86,10 +82,34 @@ public class Search extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void report(View view)
+    {
+        Intent intent = new Intent(Finder.this, FReport.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        String name= extras.getString("name");
+        Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
+        intent.putExtra("name",name);
+        intent.putExtra("email",email);
+        startActivity(intent);
+    }
+
+    public void search(View view){
+        Intent intent =new Intent(this,SearchLoss.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        String name= extras.getString("name");
+       // Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
+        intent.putExtra("name",name);
+        intent.putExtra("email","hello");
+        startActivity(intent);
+
     }
 }

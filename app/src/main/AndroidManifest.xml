@@ -51,7 +51,13 @@
         <activity
             android:name=".Search"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Finder"
+            android:label="@string/title_activity_finder"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FReport" />
+        <activity android:name=".SearchLoss"></activity>
     </application>
 
 </manifest>
