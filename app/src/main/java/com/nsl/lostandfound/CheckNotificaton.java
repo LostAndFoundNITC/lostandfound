@@ -2,6 +2,7 @@ package com.nsl.lostandfound;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -21,8 +22,9 @@ public class CheckNotificaton extends AppCompatActivity {
         } else {
             w.clearCache(true);
             w.clearHistory();
-            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckNotification.php?=email'"+email+"'");
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckNotification.php?email="+email+"");
 
         }
+        Log.e("url","http://andromeda.nitc.ac.in/~m150035ca/Web/CheckNotification.php?email="+email+"");
     }
 }
