@@ -16,7 +16,7 @@ public class CheckNotificaton extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
         WebView w;
-        w = (WebView) findViewById(R.id.search_form);
+        w = (WebView) findViewById(R.id.checknotificaion);
         if (!DetectConnection.checkInternetConnection(this)) {
             Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
 
