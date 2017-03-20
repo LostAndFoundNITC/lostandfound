@@ -2,6 +2,8 @@ package com.nsl.lostandfound;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 public class CheckClaim extends AppCompatActivity {
 
@@ -11,7 +13,7 @@ public class CheckClaim extends AppCompatActivity {
         setContentView(R.layout.activity_check_claim);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
-       /* WebView w;
+       WebView w;
         w = (WebView) findViewById(R.id.checkclaim);
         if (!DetectConnection.checkInternetConnection(this)) {
             Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
@@ -20,13 +22,7 @@ public class CheckClaim extends AppCompatActivity {
 
             w.clearCache(true);
             w.clearHistory();
-            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckClaim.php?email='"+email+"'");
-            w.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return (event.getAction() == MotionEvent.ACTION_MOVE);
-                }
-            });
-        }*/
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckClaim.php?email="+email);
+        }
     }
 }
