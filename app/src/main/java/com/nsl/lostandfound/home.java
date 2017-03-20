@@ -2,7 +2,6 @@ package com.nsl.lostandfound;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -74,24 +73,21 @@ public class home extends MainActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private Boolean exit = false;
+
+
+    /**
+     * Back button listener.
+     * Will close the application if the back button pressed twice.
+     */
     @Override
     public void onBackPressed() {
-        if (exit) {
-            finish(); // finish activity
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
 
-        }
-
+// make sure you have this outcommented
+// super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

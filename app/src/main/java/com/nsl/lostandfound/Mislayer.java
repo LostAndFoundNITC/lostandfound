@@ -42,7 +42,7 @@ public class Mislayer extends MainActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+           finish();
         }
     }
 
@@ -144,6 +144,13 @@ public class Mislayer extends MainActivity
     }
     public void search(View view){
         Intent intent = new Intent(this,Search.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        intent.putExtra("email",email);
+        startActivity(intent);
+    }
+    public void checkNotification(View view){
+        Intent intent = new Intent(this,CheckNotificaton.class);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
         intent.putExtra("email",email);

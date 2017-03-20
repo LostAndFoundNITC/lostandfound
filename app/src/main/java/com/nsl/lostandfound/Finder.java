@@ -40,7 +40,7 @@ public class Finder extends MainActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 
@@ -152,5 +152,13 @@ public class Finder extends MainActivity
         intent.putExtra("email","hello");
         startActivity(intent);
 
+    }
+
+    public void checkClaims(View view){
+        Intent intent = new Intent(this,CheckClaim.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        intent.putExtra("email",email);
+        startActivity(intent);
     }
 }

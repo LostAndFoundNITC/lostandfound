@@ -168,7 +168,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /*********************************************************/
+    /**
+     * Back button listener.
+     * Will close the application if the back button pressed twice.
+     */
+    @Override
+    public void onBackPressed() {
 
+// make sure you have this outcommented
+// super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
 
 
