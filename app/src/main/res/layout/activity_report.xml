@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         android:weightSum="1">
-
+`
         <TextView
             android:id="@+id/contact_form_title"
             android:layout_width="wrap_content"
@@ -50,14 +50,24 @@
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="161dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="(*Enter standard color only-Black,Red,Blue,Green,White)"
+            android:textColor="#212F3D"
+            android:textSize="10sp"
+            android:typeface="serif" />
+
         <EditText
             android:id="@+id/etLength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text=""
-            android:hint="Length"
+            android:inputType="number"
+            android:hint="Length(in Approx inches)"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="221dp" />
 
@@ -66,9 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text=""
-            android:hint="width"
+            android:inputType="number"
+            android:hint="Width(In approx inches)"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="286dp" />
 
