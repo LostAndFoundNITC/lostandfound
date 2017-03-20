@@ -149,4 +149,11 @@ public class Mislayer extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
+    public void checkNotification(View view){
+        Intent intent = new Intent(this,CheckNotificaton.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        intent.putExtra("email",email);
+        startActivity(intent);
+    }
 }

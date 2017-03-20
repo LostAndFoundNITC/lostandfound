@@ -153,4 +153,12 @@ public class Finder extends MainActivity
         startActivity(intent);
 
     }
+
+    public void checkClaim(View view){
+        Intent intent = new Intent(this,CheckClaim.class);
+        Bundle extras = getIntent().getExtras();
+        String email= extras.getString("email");
+        intent.putExtra("email",email);
+        startActivity(intent);
+    }
 }

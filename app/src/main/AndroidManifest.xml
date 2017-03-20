@@ -57,7 +57,9 @@
             android:label="@string/title_activity_finder"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FReport" />
-        <activity android:name=".SearchLoss"></activity>
+        <activity android:name=".SearchLoss" />
+        <activity android:name=".CheckNotificaton" />
+        <activity android:name=".CheckClaim"></activity>
     </application>
 
 </manifest>
