@@ -21,10 +21,9 @@ public class CheckNotificaton extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
 
         } else {
-
             w.clearCache(true);
             w.clearHistory();
-            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/MislayerSearch.php?CheckNotification='"+email+"'");
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckNotification.php?=email'"+email+"'");
             w.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {

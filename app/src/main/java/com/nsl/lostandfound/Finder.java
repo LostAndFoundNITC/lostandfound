@@ -154,7 +154,7 @@ public class Finder extends MainActivity
 
     }
 
-    public void checkClaim(View view){
+    public void checkClaims(View view){
         Intent intent = new Intent(this,CheckClaim.class);
         Bundle extras = getIntent().getExtras();
         String email= extras.getString("email");
