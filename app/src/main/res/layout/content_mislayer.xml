@@ -7,8 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.nsl.lostandfound.Mislayer"
     tools:showIn="@layout/app_bar_mislayer"
-    android:background="@drawable/kl"
-    android:weightSum="1">
+    android:background="@drawable/kl">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

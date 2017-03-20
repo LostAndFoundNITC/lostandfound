@@ -2,6 +2,8 @@ package com.nsl.lostandfound;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -22,7 +24,12 @@ public class CheckNotificaton extends AppCompatActivity {
             w.clearCache(true);
             w.clearHistory();
             w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/CheckNotification.php?=email'"+email+"'");
-
+            w.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return (event.getAction() == MotionEvent.ACTION_MOVE);
+                }
+            });
         }
     }
 }

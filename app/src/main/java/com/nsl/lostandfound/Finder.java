@@ -40,7 +40,7 @@ public class Finder extends MainActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            finish();
+            super.onBackPressed();
         }
     }
 
