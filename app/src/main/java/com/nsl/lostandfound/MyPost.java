@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
@@ -37,10 +38,23 @@ public class MyPost extends MainActivity
         navigationView.setNavigationItemSelectedListener(this);
         Bundle extras = getIntent().getExtras();
         String email = extras.getString("email");
-        WebView w = (WebView) findViewById(R.id.MyPost);
+
+        WebView w;
+        w = (WebView) findViewById(R.id.MyPost);
         w.setWebViewClient(new WebViewClient());
-        w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/mypost.php?email='" + email + "'");
-        //w.loadUrl("http://www.google.com");
+
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            w.clearCache(true);
+            w.clearHistory();
+            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/mypost.php?email='" + email + "'");
+        }
+
+
+
     }
 
     @Override

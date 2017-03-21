@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 public class CheckNotificaton extends AppCompatActivity {
@@ -16,6 +17,8 @@ public class CheckNotificaton extends AppCompatActivity {
         String email= extras.getString("email");
         WebView w;
         w = (WebView) findViewById(R.id.checknotificaion);
+        w.setWebViewClient(new WebViewClient());
+
         if (!DetectConnection.checkInternetConnection(this)) {
             Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -43,6 +44,8 @@ public class home extends MainActivity
             Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
         } else {
             w = (WebView) findViewById(R.id.recent);
+            w.setWebViewClient(new WebViewClient());
+
             w.clearCache(true);
             w.clearHistory();
             w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/recent.php");
