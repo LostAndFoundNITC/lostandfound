@@ -46,9 +46,20 @@ public class Search extends MainActivity
 
         } else {
 
-            w.clearCache(true);
-            w.clearHistory();
-            w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/MislayerSearch.php?email='"+email+"'");
+
+
+            if (!DetectConnection.checkInternetConnection(this)) {
+                Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                w.clearCache(true);
+                w.clearHistory();
+                w.loadUrl("http://andromeda.nitc.ac.in/~m150035ca/Web/MislayerSearch.php?email='"+email+"'");
+            }
+
+
+
         }
 
 
