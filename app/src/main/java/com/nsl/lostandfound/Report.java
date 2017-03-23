@@ -143,24 +143,39 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void OnLogin(View view) {
-        if(flag==true) {
+        if (flag == true) {
             uploadImage();
-        }
-        else
-            uploadImage="";
+        } else
+            uploadImage = "";
 
         String name = NameEt.getText().toString();
         String description = DescriptionEt.getText().toString();
         String color = ColorEt.getText().toString();
+
+//        if(color =="black" || color=="blue"|| color=="white"|| color=="green"|| color=="red"){
+
         String length = LengthEt.getText().toString();
         String width = WidthEt.getText().toString();
         String location = LocationEt.getText().toString();
         String email = EmailEt.getText().toString();
         Bundle extras = getIntent().getExtras();
-        email= extras.getString("email");
+        email = extras.getString("email");
         String type = "login";
+        //Toast.makeText(this, color, Toast.LENGTH_LONG).show();
+
+        if(color.compareTo("red")==0 || color.compareTo("blue")==0 || color.compareTo("green")==0|| color.compareTo("white")==0|| color.compareTo("black")==0){
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, name, description, color, length, width, location,email,uploadImage );
+        backgroundWorker.execute(type, name, description, color, length, width, location, email, uploadImage);
+   }
+        else{
+            Toast.makeText(this,"Enter color from the given list",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+
+
+
 //        Toast.makeText(this,"Report Successfull",Toast.LENGTH_LONG).show();
 //        extras = getIntent().getExtras();
 //        String username= extras.getString("name");
