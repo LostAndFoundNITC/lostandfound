@@ -149,7 +149,7 @@ public class Finder extends MainActivity
         String name= extras.getString("name");
        // Toast.makeText(this,email+name,Toast.LENGTH_LONG).show();
         intent.putExtra("name",name);
-        intent.putExtra("email","hello");
+        intent.putExtra("email",email);
         startActivity(intent);
 
     }
