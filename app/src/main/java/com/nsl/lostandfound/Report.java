@@ -162,7 +162,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         email = extras.getString("email");
         String type = "login";
         //Toast.makeText(this, color, Toast.LENGTH_LONG).show();
-
+        color=color.trim();
         if(color.compareTo("red")==0 || color.compareTo("blue")==0 || color.compareTo("green")==0|| color.compareTo("white")==0|| color.compareTo("black")==0){
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type, name, description, color, length, width, location, email, uploadImage);
