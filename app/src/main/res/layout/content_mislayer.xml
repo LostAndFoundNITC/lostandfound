@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="wrap_content"
     tools:context="com.nsl.lostandfound.Mislayer"
     tools:showIn="@layout/app_bar_mislayer"
-    android:background="@drawable/kl"
-    android:weightSum="1">
+    android:background="@drawable/kl">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:id="@+id/form_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,8 +29,6 @@
                 android:layout_height="wrap_content"
                 android:text="Report Item"
                 android:theme="@style/MyButton"
-                tools:layout_editor_absoluteX="148dp"
-                tools:layout_editor_absoluteY="118dp"
                 android:layout_below="@+id/search"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="28dp"
@@ -50,4 +55,6 @@
                 android:layout_below="@+id/button"
                 android:layout_centerHorizontal="true"
                 android:onClick="checkNotification"/>
+            </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

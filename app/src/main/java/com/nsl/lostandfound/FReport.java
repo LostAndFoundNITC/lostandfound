@@ -157,8 +157,14 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         Bundle extras = getIntent().getExtras();
         email= extras.getString("email");
         String type = "login";
-        BackgroundWorkerFinder backgroundWorkerFinder = new BackgroundWorkerFinder(this);
-        backgroundWorkerFinder.execute(type, name, description, color, length, width, location,email,uploadImage );
+        if(color.compareTo("red")==0 || color.compareTo("blue")==0 || color.compareTo("green")==0|| color.compareTo("white")==0|| color.compareTo("black")==0) {
+            BackgroundWorkerFinder backgroundWorkerFinder = new BackgroundWorkerFinder(this);
+            backgroundWorkerFinder.execute(type, name, description, color, length, width, location, email, uploadImage);
+        }
+        else{
+            Toast.makeText(this,"Enter color from the given list",Toast.LENGTH_LONG).show();
+            return;
+        }
 //        Toast.makeText(this,"Report Successfull",Toast.LENGTH_LONG).show();
 //        extras = getIntent().getExtras();
 //        String username= extras.getString("name");
