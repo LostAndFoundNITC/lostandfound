@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Name"
-        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
         android:text=""
         tools:layout_editor_absoluteX="153dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:text=""
         android:hint="Color"
         tools:layout_editor_absoluteX="153dp"
@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
         android:text=""
         android:hint="Location"
         tools:layout_editor_absoluteX="153dp"
@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
         android:text=""
         android:hint="Description"/>
 
@@ -113,36 +113,44 @@
 
 
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Image Upload"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Select Image"
+        android:textSize="10dp"
         android:id="@+id/buttonChoose" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/imageView" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="string_view_image"
-        android:id="@+id/buttonViewImage"
-        android:visibility="gone"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            >
 
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/imageView" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="upload_image"
-        android:id="@+id/buttonUpload"
-        android:onClick="OnLogin"
-        android:visibility="gone"
-        />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="string_view_image"
+                android:id="@+id/buttonViewImage"
+                android:visibility="gone"
+                />
 
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="upload_image"
+                android:textSize="10dp"
+                android:id="@+id/buttonUpload"
+                android:onClick="OnLogin"
+                />
+
+        </LinearLayout>
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="126dp"

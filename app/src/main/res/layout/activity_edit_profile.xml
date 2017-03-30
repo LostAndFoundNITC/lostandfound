@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Address"
-            android:inputType="textPersonName"
+            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
             android:text=""
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -45,7 +45,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Contact"
-            android:inputType="textPersonName"
+            android:inputType="number"
+            android:maxLength="10"
+
             android:text=""
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="16dp" />

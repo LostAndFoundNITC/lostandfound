@@ -123,7 +123,14 @@ public class home extends MainActivity
             intent.putExtra("name",name);
            intent.putExtra("email",email);
             startActivity(intent);
-        } else if (id == R.id.logout) {
+        }else if (id == R.id.home) {
+            Intent intent = new Intent(this, home.class);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
+        }
+        else if (id == R.id.logout) {
             signOut();
             revokeAccess();
 

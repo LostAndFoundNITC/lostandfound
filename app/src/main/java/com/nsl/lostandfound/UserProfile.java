@@ -119,7 +119,14 @@ public class UserProfile extends MainActivity
             intent.putExtra("email",email);
             startActivity(intent);
             // Handle the lost action
-        } else if (id == R.id.found) {
+        }else if (id == R.id.home) {
+            Intent intent = new Intent(this, home.class);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
+        }
+        else if (id == R.id.found) {
             Intent intent = new Intent(this, Finder.class);
             intent.putExtra("name",name);
             intent.putExtra("email",email);

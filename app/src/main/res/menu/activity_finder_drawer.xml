@@ -18,6 +18,13 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="My Posts" />
 
+        <item
+
+            android:id="@+id/home"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Home" />
+
+
     </group>
 
     <item android:title=" " >

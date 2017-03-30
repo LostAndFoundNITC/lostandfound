@@ -17,6 +17,8 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import static android.R.attr.name;
+
 public class MyPost extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -63,6 +65,11 @@ public class MyPost extends MainActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            Intent intent = new Intent(this, home.class);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
             finish();
         }
     }
@@ -88,7 +95,7 @@ public class MyPost extends MainActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+String email;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -96,7 +103,7 @@ public class MyPost extends MainActivity
         int id = item.getItemId();
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
-        String email= extras.getString("email");
+        email= extras.getString("email");
         // String photo = extras.getString("photo");
         if (id == R.id.lost) {
             Intent intent = new Intent(this, Mislayer.class);
@@ -105,7 +112,14 @@ public class MyPost extends MainActivity
             intent.putExtra("email",email);
             startActivity(intent);
             // Handle the lost action
-        } else if (id == R.id.found) {
+        }else if (id == R.id.home) {
+            Intent intent = new Intent(this, home.class);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
+        }
+        else if (id == R.id.found) {
             Intent intent = new Intent(this, Finder.class);
             intent.putExtra("name",name);
             intent.putExtra("email",email);
