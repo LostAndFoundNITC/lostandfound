@@ -47,6 +47,7 @@
             android:hint="Contact"
             android:inputType="number"
             android:maxLength="10"
+
             android:text=""
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="16dp" />

@@ -116,32 +116,36 @@
 
         <Button
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Image Upload"
+            android:layout_height="35dp"
+            android:text="Select Image"
             android:id="@+id/buttonChoose" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/imageView" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/imageView" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="string_view_image"
+        android:id="@+id/buttonViewImage"
+        android:visibility="gone"
+        />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="string_view_image"
-            android:id="@+id/buttonViewImage"
-            android:visibility="gone"
-            />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="upload_image"
+        android:id="@+id/buttonUpload"
+        android:onClick="OnLogin"
+        />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="upload_image"
-            android:id="@+id/buttonUpload"
-            android:onClick="OnLogin"
-            android:visibility="gone"
-            />
+
+</LinearLayout>
 
         <Button
             android:id="@+id/btnLogin"

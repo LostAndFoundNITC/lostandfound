@@ -121,7 +121,14 @@ public class Search extends MainActivity
             intent.putExtra("name",name);
             intent.putExtra("email",email);
             startActivity(intent);
-        } else if (id == R.id.user_posts) {
+        }else if (id == R.id.home) {
+            Intent intent = new Intent(this, home.class);
+            //intent.putExtra("photo",photo);
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
+            startActivity(intent);
+        }
+        else if (id == R.id.user_posts) {
             Intent intent = new Intent(this, MyPost.class);
             intent.putExtra("name",name);
             intent.putExtra("email",email);

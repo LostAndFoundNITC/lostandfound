@@ -29,6 +29,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
     public static String uploadImage="";
     private int PICK_IMAGE_REQUEST = 1;
     private boolean flag;
+
     private Button buttonChoose;
     private Button buttonUpload;
     private Button buttonView;
@@ -57,10 +58,10 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         buttonView = (Button) findViewById(R.id.buttonViewImage);
 
         imageView = (ImageView) findViewById(R.id.imageView);
+        buttonUpload.setEnabled(false);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
-
     }
 
     private void showFileChooser() {
@@ -93,10 +94,13 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         return encodedImage;
     }
 
+
+
     @Override
     public void onClick(View v) {
         if (v == buttonChoose) {
             showFileChooser();
+            buttonUpload.setEnabled(true);
             flag=true;
 
         }
@@ -143,11 +147,10 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void OnLogin(View view) {
-        if (flag == true) {
-            uploadImage();
-        } else
+        if (flag != true) {
+            //  uploadImage();
             uploadImage = "";
-
+        }
         String name = NameEt.getText().toString();
         String description = DescriptionEt.getText().toString();
         String color = ColorEt.getText().toString();

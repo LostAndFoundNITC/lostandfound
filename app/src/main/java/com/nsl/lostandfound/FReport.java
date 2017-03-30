@@ -53,6 +53,7 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
         buttonView = (Button) findViewById(R.id.buttonViewImage);
+        buttonUpload.setEnabled(false);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -95,6 +96,8 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
         if (v == buttonChoose) {
             showFileChooser();
+            buttonUpload.setEnabled(true);
+
             flag=true;
 
         }
@@ -141,12 +144,9 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void OnLogin(View view) {
-        if(flag==true) {
-            uploadImage();
+        if(flag!=true) {
+            uploadImage = "";
         }
-        else
-            uploadImage="";
-
         String name = NameEt.getText().toString();
         String description = DescriptionEt.getText().toString();
         String color = ColorEt.getText().toString();
