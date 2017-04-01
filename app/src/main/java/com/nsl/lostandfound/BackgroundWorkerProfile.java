@@ -1,3 +1,9 @@
+
+/**
+*\brief This is the BackGroundWorker file.This Code will be invoked when User clicks the update profile button in profile activity .
+*This class is recieving data from profile activity and sending it to the php file.
+*It is in the package com.nsl.lostandfound;
+*/
 package com.nsl.lostandfound;
 
 /**
@@ -20,6 +26,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+/**\class class with name BackgroundWorkerProfile is being created here.BackgroundWorkerProfile extends AsyncTask.
+*/
 
 public class BackgroundWorkerProfile extends AsyncTask<String,Void,String> {
     Context context;
