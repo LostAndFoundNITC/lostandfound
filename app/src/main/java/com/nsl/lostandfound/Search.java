@@ -1,3 +1,9 @@
+
+/**
+*\brief This is the Search file.This Code will be invoked when User clicks the search functionality in the mislayer activity .This provides an interface for user to search found items.
+*It is in the package com.nsl.lostandfound;
+*/
+
 package com.nsl.lostandfound;
 
 import android.content.Intent;
@@ -16,10 +22,14 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+/**\class class with name Search is being created here.Search extends MainActivity and  implements  NavigationView.OnNavigationItemSelectedListener .
+*/
 
 public class Search extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+ /**\fn onCreate function.
+	*\brief handles the navigation drawer and provides an interface to search found items.
+	*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +77,10 @@ public class Search extends MainActivity
 
 
     }
+    
+     /**\fn onBackPressed function.
+	*\brief handles the backbutton of phone.
+	*/
 
     @Override
     public void onBackPressed() {
@@ -99,6 +113,11 @@ public class Search extends MainActivity
 
         return super.onOptionsItemSelected(item);
     }
+    
+    
+     /**\fn onNavigationItemSelected function.
+	*\brief handles clicks in the nav drawer and redirects the app to the activity user has clicked in the nav drawer.
+	*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -149,7 +168,9 @@ public class Search extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+/**\fn signOut function.
+	*\brief handles the signout button.
+	*/
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
