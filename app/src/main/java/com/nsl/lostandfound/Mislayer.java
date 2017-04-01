@@ -135,7 +135,7 @@ public class Mislayer extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-/**
+/**\fn signOut function...
 *action of signOut is defined here.
 */
     private void signOut() {
@@ -158,7 +158,7 @@ public class Mislayer extends MainActivity
                     }
                 });
     }
-/**
+/**\fn report function...
 *Defnition of report function. a call to Report.class is made in this.
 */
     public void report(View view)
@@ -171,7 +171,7 @@ public class Mislayer extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
-/**
+/**\fn function...
 *Defnition of search function. a call to Search.class is made in this.
 */
     
@@ -183,7 +183,7 @@ public class Mislayer extends MainActivity
         startActivity(intent);
     }
 
-/**
+/**\fn function...
 *Defnition of checkNotification . a call to CheckNotification.class is made in this.
 */
     
