@@ -1,3 +1,9 @@
+/**
+*\brief This is the MainActivity file.This Code will be invoked when User opens the Application .This provides an interface for user to login.
+*It is in the package com.nsl.lostandfound;
+*/
+
+
 package com.nsl.lostandfound;
 
 import android.app.AlertDialog;
@@ -28,7 +34,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-
+/**\class class with name MainActivity is being created here.MainActivity extends AppCompatActivity and  implements View.OnClickListener and GoogleApiClient.OnConnectionFailedListener .
+*/
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     MainActivity x = this;
@@ -43,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
 
-
+ /**\fn onCreate function.
+	*\brief Shows the activity on the screen which has a Google Sign-In button.
+	*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signInButton.setOnClickListener(this);
     }
 
+    
         @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -167,16 +177,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*********************************************************/
-    /**
+     
+    
+     /**\fn onCreate function.
+	*\brief Shows the activity on the screen which has a Google Sign-In button.
      * Back button listener.
-     * Will close the application if the back button pressed twice.
-     */
+     
+	*/
     @Override
     public void onBackPressed() {
-
-// make sure you have this outcommented
-// super.onBackPressed();
+ 
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -195,6 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             signIn();
         }
     }
+     /**\fn signIn function.
+	*\brief Will be invoked if 'Sign In with Google' button is pressed .
+	*/
     private void signIn() {
         //Creating an intent
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
