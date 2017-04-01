@@ -1,3 +1,9 @@
+
+/**
+*\brief This is the UserProfile file.This Code will be invoked when User opens the profile section in the app .This provides an interface for user view and update his profile.
+*It is in the package com.nsl.lostandfound;
+*/
+
 package com.nsl.lostandfound;
 
 import android.app.AlertDialog;
@@ -30,10 +36,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+/**\class class with name UserProfile is being created here.UserProfile extends MainActivity and  implements  NavigationView.OnNavigationItemSelectedListener .
+*/
+
 
 public class UserProfile extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+ /**\fn onCreate function.
+	*\brief handles the navigation drawer and also prints the user details on the screen.
+	*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +82,9 @@ public class UserProfile extends MainActivity
         backgroundWorker2.execute(type2,email);
 
     }
-
+ /**\fn onBackPressed function.
+	*\brief handles the backbutton of phone.
+	*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -102,7 +116,9 @@ public class UserProfile extends MainActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+ /**\fn onNavigationItemSelected function.
+	*\brief handles clicks in the nav drawer and redirects the app to the activity user has clicked in the nav drawer.
+	*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -152,7 +168,9 @@ public class UserProfile extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+/**\fn signOut function.
+	*\brief handles the signout button.
+	*/
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -173,7 +191,9 @@ public class UserProfile extends MainActivity
                     }
                 });
     }
-
+/**\fn EditProfile function.
+	*\brief handles the editProfile page when user chooses the updateprofile button in profile section.
+	*/
     public void EditProfile(View view)
     { Bundle extras = getIntent().getExtras();
         Intent intent = new Intent(this, EditProfile.class);
