@@ -1,4 +1,7 @@
-
+/**
+*\brief This is the EditProfile file.This Code will be invoked when User clicks the update button in profile activity .
+*It is in the package com.nsl.lostandfound;
+*/
 package com.nsl.lostandfound;
 
 import android.content.Intent;
@@ -8,7 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+/**\class class with name EditProfile is being created here.Editprofile extends ActionBarActivity.
+*/
 public class EditProfile extends ActionBarActivity {
     EditText AddressEt, PhoneEt;
     @Override
