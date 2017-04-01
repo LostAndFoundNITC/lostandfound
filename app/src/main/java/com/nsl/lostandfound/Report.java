@@ -1,5 +1,4 @@
-/**
-*This is defnition of mislayer report class. 
+/**\brief This is defnition of mislayer report class. 
 *This class will execute when user clickes on report, upload image and select image buttons on activity_report.xml . 
 *It takes all user inputs and send it to BackgroundWorkerReport class.
 */
@@ -29,8 +28,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/**
-* class class with name Report is being created here.
+/**\class class with name Report is being created here.
 *Report extends ActionBarActivity inorder to be a subclass of the class Activity.
 */
 
@@ -80,7 +78,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         buttonUpload.setOnClickListener(this);
     }
     
-    /**
+    /**\fn showFileChooser function...
     *Here is the defnition of ShowFileChooser which is for  chosing image from phone gallery. 
     */
     
@@ -109,7 +107,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         }
     }
     
-    /**
+    /**\fn getStringImage function...
     *Definition of getStringImage which converts image to string.
     */
     public String getStringImage(Bitmap bmp){
@@ -140,7 +138,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
             uploadImage();
         }
     }
-    /**
+    /**\fn uploadImage function..
     *Definition of uploadImage() which upload the image selected by user.
     */
     private void uploadImage(){
@@ -177,7 +175,7 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         ui.execute(bitmap);
     }
 
-    /**
+    /**\fn OnLogin function...
     *Defnition of OnLogin Function which is called when user clicks on Report button.
     */
     public void OnLogin(View view) {
