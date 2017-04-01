@@ -1,4 +1,11 @@
+/**
+*\brief This is the Mislayer file.This Code will be invoked when 'Lost something?' button is pressed
+*It is in the package com.nsl.lostandfound;
+*/
 package com.nsl.lostandfound;
+/**
+*Below are all imported classes/interfaces.
+*/
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +21,9 @@ import android.view.View;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+/**\class class with name Mislayer is being created here.Mislayer extends MainActivity
+    inorder to be an subclass of the class Activity.
+*/
 
 public class Mislayer extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +47,9 @@ public class Mislayer extends MainActivity
     }
 
     @Override
+    /**
+    *manages the action When bach pressed.
+    */
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -48,16 +61,20 @@ public class Mislayer extends MainActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /**
+        *Inflate the menu; this adds items to the action bar if it is present.
+        */
         getMenuInflater().inflate(R.menu.mislayer, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        /**
+        *Handle action bar item clicks here. The action bar will
+        *automatically handle clicks on the Home/Up button, so long
+        *as you specify a parent activity in AndroidManifest.xml.
+        */
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -71,7 +88,9 @@ public class Mislayer extends MainActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        /**
+        *Handle navigation view item clicks here.
+        */
         int id = item.getItemId();
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
@@ -117,7 +136,9 @@ public class Mislayer extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+/**
+*action of signOut is defined here.
+*/
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -138,7 +159,9 @@ public class Mislayer extends MainActivity
                     }
                 });
     }
-
+/**
+*Defnition of report function. a call to Report.class is made in this.
+*/
     public void report(View view)
     {
         Intent intent = new Intent(this, Report.class);
@@ -149,6 +172,10 @@ public class Mislayer extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
+/**
+*Defnition of search function. a call to Search.class is made in this.
+*/
+    
     public void search(View view){
         Intent intent = new Intent(this,Search.class);
         Bundle extras = getIntent().getExtras();
@@ -156,6 +183,11 @@ public class Mislayer extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
+
+/**
+*Defnition of checkNotification . a call to CheckNotification.class is made in this.
+*/
+    
     public void checkNotification(View view){
         Intent intent = new Intent(this,CheckNotificaton.class);
         Bundle extras = getIntent().getExtras();
