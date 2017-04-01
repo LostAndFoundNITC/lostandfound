@@ -1,5 +1,10 @@
-package com.nsl.lostandfound;
+/**
+*\brief This is the BackGroundWorkerFinder file.This Code will be invoked when User clicks the report button in Finder activity .
+*This class is recieving data from Finder activity and sending it to the php file.
+*It is in the package com.nsl.lostandfound;
+*/
 
+package com.nsl.lostandfound;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,8 +21,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-//package com.example.soorya.mreport;
-
+/**\class class with name BackgroundWorkerFinder is being created here.BackgroundWorkerFinder extends AsyncTask.
+*/
 
 public class BackgroundWorkerFinder extends AsyncTask<String,Void,String> {
     Context context;
