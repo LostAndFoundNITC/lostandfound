@@ -1,5 +1,11 @@
+/**
+*\brief This is the Finder file.
+*It is in the package com.nsl.lostandfound;
+*/
 package com.nsl.lostandfound;
-
+/**
+*Below are all imported classes/interfaces.
+*/
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,10 +21,13 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+/**\class class with name Finder is being created here.Finder extends MainActivity and implements NavigationView.OnNavigationItemSelectedListenerview.
+*/
 public class Finder extends MainActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finder);
@@ -33,7 +42,9 @@ public class Finder extends MainActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
+    /**
+    *manages the action When bach pressed.
+    */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -46,16 +57,19 @@ public class Finder extends MainActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+       /**
+        *Inflate the menu; this adds items to the action bar if it is present.
+        */
         getMenuInflater().inflate(R.menu.finder, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+     /**
+        *Handle action bar item clicks here. The action bar will
+        *automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+        */
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -67,9 +81,15 @@ public class Finder extends MainActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
+/**
+*list of item is displayed.Selection of any one directs the page to its referenced class. 
+*/
+
+@Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+       /**
+        *Handle navigation view item clicks here.
+        */
         int id = item.getItemId();
         Bundle extras = getIntent().getExtras();
         String name= extras.getString("name");
@@ -115,8 +135,10 @@ public class Finder extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    private void signOut() {
+/**
+* Action of signout is described here.
+   */
+   private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
@@ -136,7 +158,9 @@ public class Finder extends MainActivity
                     }
                 });
     }
-
+    /**
+    *Redirects the page to FReport class and starts the new activity.
+*/
     public void report(View view)
     {
         Intent intent = new Intent(Finder.this, FReport.class);
@@ -148,7 +172,9 @@ public class Finder extends MainActivity
         intent.putExtra("email",email);
         startActivity(intent);
     }
-
+    /**
+    *redirects the page to SearchLoss class 
+    */
     public void search(View view){
         Intent intent =new Intent(this,SearchLoss.class);
         Bundle extras = getIntent().getExtras();
@@ -160,7 +186,9 @@ public class Finder extends MainActivity
         startActivity(intent);
 
     }
-
+    /** 
+    *function to check claims by the mislayer and directs to the CheckClaim class
+*/
     public void checkClaims(View view){
         Intent intent = new Intent(this,CheckClaim.class);
         Bundle extras = getIntent().getExtras();
