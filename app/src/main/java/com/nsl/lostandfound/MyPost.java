@@ -25,7 +25,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import static android.R.attr.name;
-/**\class class with name MyPost is being created here.Mypost extends AppCompatActivity NavigationView.OnNavigationItemSelectedListener
+/**\class class with name MyPost is being created here.Mypost extends MainActivity and  implements NavigationView.OnNavigationItemSelectedListener
     inorder to be an subclass of the class Activity and NavigationView.
 */
 public class MyPost extends MainActivity
