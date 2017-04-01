@@ -1,5 +1,11 @@
+/**
+*\brief This is the FReport file.This Code will be invoked when the finder Logs-In and want to report for the item fe finds.
+*It is in the package com.nsl.lostandfound;
+*/
 package com.nsl.lostandfound;
-
+/**
+*Below are all imported classes/interfaces.
+*/
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,7 +24,8 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-
+/**\class class with name FReport is being created here.FReport extends ActionBarActivity and view.ONClickListener inorder to be an subclass of the class and ONClickListener.
+*/
 public class FReport extends ActionBarActivity implements View.OnClickListener {
     EditText NameEt, DescriptionEt, ColorEt, LengthEt, WidthEt, LocationEt, EmailEt;
     public static final String UPLOAD_URL = "http://andromeda.nitc.ac.in/~m150035ca/image.php";
@@ -36,6 +43,9 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
     private Bitmap bitmap;
 
     private Uri filePath;
+     /**\fn onCreate function...
+	*\brief Shows the activity on the screen on which all the credentials needed to report for the item is listed.
+	*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +71,9 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         buttonUpload.setOnClickListener(this);
 
     }
+       /**\fn showFileChooser function...
+	*\brief in this when the finder clicks on select image button the image is successfully selected from gallery.
+	*/
 
     private void showFileChooser() {
         Intent intent = new Intent();
@@ -68,7 +81,11 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
+/**\fn onActivityResult function...
+*\brief In this it is checked whether the request is for picking the image from gallery and resule code is "ok" or not.Also checks whether the data is null or not .
+*/
 
+   
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -84,6 +101,9 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
             }
         }
     }
+     /**
+    *Definition of getStringImage which converts image to string.
+    */
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -91,9 +111,13 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
+   
 
     @Override
     public void onClick(View v) {
+         /**
+        *Calling of showFileChooser() function when user clickes on select image button.
+        */
         if (v == buttonChoose) {
             showFileChooser();
             buttonUpload.setEnabled(true);
@@ -101,11 +125,17 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
             flag=true;
 
         }
+          /**
+        *Calling of uploadImage() function when user clickes on select upload image button.
+        */
         if(v == buttonUpload){
             uploadImage();
         }
     }
 
+     /**
+    *Definition of uploadImage() which upload the image selected by user.
+    */
     private void uploadImage(){
         class UploadImage extends AsyncTask<Bitmap,Void,String>{
 
@@ -143,10 +173,16 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         ui.execute(bitmap);
     }
 
+    /**
+    *Defnition of OnLogin Function which is called when finder clicks on Report button.
+    */
     public void OnLogin(View view) {
         if(flag!=true) {
             uploadImage = "";
         }
+         /**
+        *conection of all input into string format.
+        */
         String name = NameEt.getText().toString();
         String description = DescriptionEt.getText().toString();
         String color = ColorEt.getText().toString();
@@ -159,6 +195,9 @@ public class FReport extends ActionBarActivity implements View.OnClickListener {
         String type = "login";
         color=color.trim();
         if(color.compareTo("red")==0 || color.compareTo("blue")==0 || color.compareTo("green")==0|| color.compareTo("white")==0|| color.compareTo("black")==0) {
+             /**
+        *creation of BackgroundWorker(this) object.
+        */
             BackgroundWorkerFinder backgroundWorkerFinder = new BackgroundWorkerFinder(this);
             backgroundWorkerFinder.execute(type, name, description, color, length, width, location, email, uploadImage);
         }
