@@ -1,6 +1,15 @@
+/**
+*This is defnition of mislayer report class. 
+*This class will execute when user clickes on report, upload image and select image buttons on activity_report.xml . 
+*It takes all user inputs and send it to BackgroundWorkerReport class.
+*/
+
+
 package com.nsl.lostandfound;
-//
-//package com.example.soorya.mreport;
+
+/**
+*Below are all imported classes/interfaces.
+*/
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,8 +29,15 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+/**
+* class class with name Report is being created here.
+*Report extends ActionBarActivity inorder to be a subclass of the class Activity.
+*/
 
 public class Report extends ActionBarActivity implements View.OnClickListener {
+    /**
+    *Here is the variable declarations.
+    */
     EditText NameEt, DescriptionEt, ColorEt, LengthEt, WidthEt, LocationEt, EmailEt;
     public static final String UPLOAD_URL = "http://andromeda.nitc.ac.in/~m150035ca/image.php";
     public static final String UPLOAD_KEY = "image";
@@ -63,14 +79,20 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
     }
-
+    
+    /**
+    *Here is the defnition of ShowFileChooser which is for  chosing image from phone gallery. 
+    */
+    
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
-
+    
+    
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -86,6 +108,10 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
             }
         }
     }
+    
+    /**
+    *Definition of getStringImage which converts image to string.
+    */
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -98,23 +124,30 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        /**
+        *Calling of showFileChooser() function when user clickes on select image button.
+        */
         if (v == buttonChoose) {
             showFileChooser();
             buttonUpload.setEnabled(true);
             flag=true;
-
         }
+        /**
+        *Calling of uploadImage() function when user clickes on select upload image button.
+        */
+
         if(v == buttonUpload){
             uploadImage();
         }
     }
-
+    /**
+    *Definition of uploadImage() which upload the image selected by user.
+    */
     private void uploadImage(){
         class UploadImage extends AsyncTask<Bitmap,Void,String>{
 
             ProgressDialog loading;
-          //  RequestHandler rh = new RequestHandler();
-
+        
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -133,11 +166,9 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
                 Bitmap bitmap = params[0];
                 uploadImage = getStringImage(bitmap);
 
-                //HashMap<String,String> data = new HashMap<>();
-                //data.put(UPLOAD_KEY, uploadImage);
+          
                 String result="";
-                //  String result = rh.sendPostRequest(UPLOAD_URL,data);
-
+            
                 return result;
             }
         }
@@ -146,17 +177,21 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         ui.execute(bitmap);
     }
 
+    /**
+    *Defnition of OnLogin Function which is called when user clicks on Report button.
+    */
     public void OnLogin(View view) {
         if (flag != true) {
-            //  uploadImage();
+           
             uploadImage = "";
         }
+        /**
+        *conertion of all input into string format.
+        */
+        
         String name = NameEt.getText().toString();
         String description = DescriptionEt.getText().toString();
         String color = ColorEt.getText().toString();
-
-//        if(color =="black" || color=="blue"|| color=="white"|| color=="green"|| color=="red"){
-
         String length = LengthEt.getText().toString();
         String width = WidthEt.getText().toString();
         String location = LocationEt.getText().toString();
@@ -164,10 +199,16 @@ public class Report extends ActionBarActivity implements View.OnClickListener {
         Bundle extras = getIntent().getExtras();
         email = extras.getString("email");
         String type = "login";
-        //Toast.makeText(this, color, Toast.LENGTH_LONG).show();
+     
         color=color.trim();
         if(color.compareTo("red")==0 || color.compareTo("blue")==0 || color.compareTo("green")==0|| color.compareTo("white")==0|| color.compareTo("black")==0){
+        /**
+        *creation of BackgroundWorker(this) object.
+        */
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        /**
+        *Calling backgroundWorker class with all user inputs as parameters .
+        */
         backgroundWorker.execute(type, name, description, color, length, width, location, email, uploadImage);
    }
         else{
